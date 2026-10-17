@@ -1,0 +1,14 @@
+.gradle/
+.idea/
+.kotlin/
+build/
+local.properties
+*.iml
+.DS_Store
+captures/
+
+# Signing keys and stray build artifacts outside build/
+*.jks
+*.keystore
+*.apk
+*.aab
