@@ -1,4 +1,4 @@
-package dev.davide.miniplayer
+package com.classicspotifywidget
 
 import android.appwidget.AppWidgetManager
 import android.content.ActivityNotFoundException
@@ -37,7 +37,7 @@ class SetupActivity : ComponentActivity() {
             }
 
         setContent {
-            MiniPlayerTheme {
+            ClassicSpotifyWidgetTheme {
                 SetupScreen(
                     granted = granted,
                     track = track,

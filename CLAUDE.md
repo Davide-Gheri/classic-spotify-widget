@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Android home-screen widgets that replace Spotify's own widget. The README covers what each class does; this file covers what isn't obvious from the code.
+Classic Spotify Widget: Android home-screen widgets that replace Spotify's own widget. Package `com.classicspotifywidget`. The README covers what each class does; this file covers what isn't obvious from the code.
 
 ## Build
 
@@ -13,7 +13,7 @@ Android home-screen widgets that replace Spotify's own widget. The README covers
 
 ## Architecture notes
 
-- Two widgets share one renderer. `PlayerWidget` is the slim one; `ClassicPlayerWidget` is a 4×1 in the style of Spotify's old widget, with a blue band on top and a dark controls bar below. Both layouts use the **same view IDs**, so `WidgetRenderer.build()` fills either one. Only the slim widget applies the width breakpoints (`fitWidth`).
+- Two widgets share one renderer. `PlayerWidget` is the slim one ("Slim Spotify Widget"); `ClassicPlayerWidget` ("Classic Spotify Widget") is a 4×1 in the style of Spotify's old widget, with a blue band on top and a dark controls bar below. Both layouts use the **same view IDs**, so `WidgetRenderer.build()` fills either one. Only the slim widget applies the width breakpoints (`fitWidth`).
 - The widgets are plain `RemoteViews`. Only the setup screen (`SetupActivity` and `SetupScreen`) uses Compose / Material 3. Its widget previews inflate the real widget layouts through `AndroidView`.
 - Classic layout: the band and the bar split the height 3:2 by weight, and the cover fills the band's height. RemoteViews can't clip children, so the root has the dark rounded background and the band has a shape with only its top corners rounded.
 - The user's phone uses a font scale of 1.15. Text in 1-row layouts clips easily, so check descenders when changing sizes or padding.

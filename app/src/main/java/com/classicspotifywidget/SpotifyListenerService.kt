@@ -1,4 +1,4 @@
-package dev.davide.miniplayer
+package com.classicspotifywidget
 
 import android.app.Notification
 import android.media.MediaMetadata

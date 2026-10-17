@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MiniPlayer"
+rootProject.name = "ClassicSpotifyWidget"
 include(":app")

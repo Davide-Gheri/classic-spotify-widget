@@ -1,4 +1,4 @@
-package dev.davide.miniplayer
+package com.classicspotifywidget
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 
 /** Material You: colors from the wallpaper on Android 12+, the classic widget's blue before. */
 @Composable
-fun MiniPlayerTheme(content: @Composable () -> Unit) {
+fun ClassicSpotifyWidgetTheme(content: @Composable () -> Unit) {
     val dark = isSystemInDarkTheme()
     val context = LocalContext.current
     val colors = when {

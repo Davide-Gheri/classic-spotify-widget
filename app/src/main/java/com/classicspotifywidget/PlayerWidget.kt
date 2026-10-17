@@ -1,4 +1,4 @@
-package dev.davide.miniplayer
+package com.classicspotifywidget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider

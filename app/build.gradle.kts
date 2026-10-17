@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "dev.davide.miniplayer"
+    namespace = "com.classicspotifywidget"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "dev.davide.miniplayer"
+        applicationId = "com.classicspotifywidget"
         minSdk = 28
         targetSdk = 35
         versionCode = 1

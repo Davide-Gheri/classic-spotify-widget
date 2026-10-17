@@ -1,4 +1,4 @@
-package dev.davide.miniplayer
+package com.classicspotifywidget
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -21,9 +21,9 @@ class ControlReceiver : BroadcastReceiver() {
 }
 
 object PlayerControls {
-    const val ACTION_PLAY_PAUSE = "dev.davide.miniplayer.action.PLAY_PAUSE"
-    const val ACTION_NEXT = "dev.davide.miniplayer.action.NEXT"
-    const val ACTION_PREVIOUS = "dev.davide.miniplayer.action.PREVIOUS"
+    const val ACTION_PLAY_PAUSE = "com.classicspotifywidget.action.PLAY_PAUSE"
+    const val ACTION_NEXT = "com.classicspotifywidget.action.NEXT"
+    const val ACTION_PREVIOUS = "com.classicspotifywidget.action.PREVIOUS"
 
     /** How long play waits for Spotify to start playing before opening it. A cold resume takes about 5 s. */
     private const val RESUME_TIMEOUT_MS = 6000L

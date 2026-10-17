@@ -1,4 +1,4 @@
-package dev.davide.miniplayer
+package com.classicspotifywidget
 
 import android.appwidget.AppWidgetProvider
 import android.graphics.Bitmap
@@ -218,7 +218,7 @@ private fun fillPreview(view: android.view.View, track: TrackStore.State?, cover
 @Preview
 @Composable
 private fun SetupScreenPreview() {
-    MiniPlayerTheme {
+    ClassicSpotifyWidgetTheme {
         SetupScreen(
             granted = false,
             track = null,
