@@ -1,0 +1,45 @@
+name: Build APKs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 25
+
+      # The runner's SDK may not have the platform Compose needs (compileSdk 37).
+      - name: Install Android SDK packages
+        run: >
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          "platforms;android-37.0" "build-tools;36.0.0"
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Build debug and release
+        run: ./gradlew assembleDebug assembleRelease
+
+      # Release is signed with this runner's own debug key, so it won't install over a
+      # build made on another machine without uninstalling first.
+      - uses: actions/upload-artifact@v7
+        with:
+          name: classic-spotify-widget-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: classic-spotify-widget-release
+          path: app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
