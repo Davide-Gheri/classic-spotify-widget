@@ -1,6 +1,8 @@
 # Classic Spotify Widget
 
-Home-screen widgets for Spotify on Android: cover, title, artist, previous / play-pause / next. They replace Spotify's own widget and KWGT.
+Spotify removed its perfectly fine classic home-screen widget, and the new one is worse. This project recreates the classic widget experience.
+
+Home-screen widgets for Spotify on Android: cover, title, artist, previous / play-pause / next.
 
 - Shows only Spotify, even when YouTube or another app is playing.
 - Keeps the last Spotify track after Spotify is closed or killed. The cover is cached on disk too.
