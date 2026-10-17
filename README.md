@@ -6,6 +6,7 @@ Home-screen widgets for Spotify on Android: cover, title, artist, previous / pla
 
 - Shows only Spotify, even when YouTube or another app is playing.
 - Keeps the last Spotify track after Spotify is closed or killed. The cover is cached on disk too.
+- The background takes its color from the album cover, like Spotify's current widget: the cover's dominant color, darkened until the white text stays readable.
 - Two styles: *Classic Spotify Widget*, a 4×1 in the style of Spotify's old widget, and *Slim Spotify Widget*, a single slim row.
 - Both work down to 1 row high. The slim one shows everything at 3×1 and up; narrower, it drops the cover, then the text.
 - Kotlin. The widgets are plain `RemoteViews`; the app screen uses Jetpack Compose with Material 3 (Material You colors on Android 12+). minSdk 28 (Android 9), target 35, compile 37.
@@ -37,6 +38,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 | `TrackStore` | Last track, playback flags and last player in SharedPreferences, plus the cover in `files/cover.jpg`. |
 | `WidgetRenderer` | Builds the `RemoteViews` from `TrackStore` and only re-renders when something changed. |
 | `PlayerControls` | Button taps. If Spotify's session is alive, it uses the session's transport controls. If not, it presses Spotify's own notification button (`SpotifyActions`), or sends a media key that Android delivers to the last app that played. |
+| `WidgetColors` | Picks the background color from the cover (AndroidX Palette) and maps it onto each layout's background views. |
 | `SpotifyActions` | Spotify's previous / play / next buttons from its media notification, kept in memory so they still work after Spotify has closed. |
 | `SetupActivity` / `SetupScreen` | Compose screen: notification access, a live preview of each widget with the last track, and buttons to pin them. |
 
@@ -48,7 +50,7 @@ If Spotify still hasn't started playing 6 seconds after play, the widget opens i
 
 ## Tweaks
 
-- Colors: `res/values/colors.xml`.
+- Colors: `res/values/colors.xml` holds the fixed colors used until a cover has been seen. The cover-based color logic is in `WidgetColors.kt`.
 - Breakpoints for hiding the cover and text: `MIN_WIDTH_FOR_COVER` and `MIN_WIDTH_FOR_TEXT` in `WidgetRenderer.kt`.
 - Layouts: `res/layout/widget_classic.xml` and `res/layout/widget_player.xml` (slim). Widgets only allow a limited set of views (`LinearLayout`, `FrameLayout`, `ImageView`, `TextView`…).
 

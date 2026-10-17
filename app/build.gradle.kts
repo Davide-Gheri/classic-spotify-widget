@@ -45,5 +45,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.activity:activity-compose:1.13.0")
+    // Picks the widget background color from the album cover.
+    implementation("androidx.palette:palette:1.0.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

@@ -3,13 +3,13 @@
     <!-- Widget look: change these to restyle it. -->
     <color name="widget_background">#FF1E1E1E</color>
     <color name="widget_title">#FFFFFFFF</color>
-    <color name="widget_subtitle">#FFB0B0B0</color>
+    <color name="widget_subtitle">#B3FFFFFF</color>
 
     <!-- Classic widget, after Spotify's old one. -->
     <color name="classic_header">#FF465D90</color>
     <color name="classic_controls">#FF1C2539</color>
     <color name="classic_title">#FFFFFFFF</color>
-    <color name="classic_subtitle">#FFCFE4FF</color>
+    <color name="classic_subtitle">#C7FFFFFF</color>
 
     <color name="ic_launcher_background">#FF263238</color>
 </resources>

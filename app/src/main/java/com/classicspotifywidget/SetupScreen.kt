@@ -176,7 +176,7 @@ private fun WidgetCard(
             // The real widget layout, on a strip that stands in for the home screen.
             AndroidView(
                 factory = { context -> LayoutInflater.from(context).inflate(layout, FrameLayout(context), false) },
-                update = { view -> fillPreview(view, track, cover) },
+                update = { view -> fillPreview(view, layout, track, cover) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(20.dp))
@@ -203,9 +203,13 @@ private fun WidgetCard(
     }
 }
 
-/** Shows the last track in a widget layout, or the layout's placeholders. */
-private fun fillPreview(view: android.view.View, track: TrackStore.State?, cover: Bitmap?) {
+/** Shows the last track and its colors in a widget layout, or the layout's placeholders. */
+private fun fillPreview(view: android.view.View, @LayoutRes layout: Int, track: TrackStore.State?, cover: Bitmap?) {
     val context = view.context
+    val coverColor = if (cover != null) track?.coverColor else null
+    for ((id, color) in WidgetColors.forLayout(context, layout, coverColor)) {
+        view.findViewById<ImageView>(id).setColorFilter(color)
+    }
     val hasTrack = track?.hasTrack == true
     view.findViewById<TextView>(R.id.title).text =
         if (hasTrack) track?.title else context.getString(R.string.preview_title)

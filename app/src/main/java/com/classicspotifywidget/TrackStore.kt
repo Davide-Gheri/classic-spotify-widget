@@ -19,6 +19,8 @@ object TrackStore {
         val artist: String?,
         val coverKey: String?,
         val coverVersion: Long,
+        /** Widget background color picked from the cover; null when there's none. */
+        val coverColor: Int?,
         val sessionAlive: Boolean,
         val playing: Boolean,
         val lastPlayer: String?,
@@ -33,6 +35,7 @@ object TrackStore {
     private const val K_ARTIST = "artist"
     private const val K_COVER_KEY = "cover_key"
     private const val K_COVER_VERSION = "cover_version"
+    private const val K_COVER_COLOR = "cover_color"
     private const val K_ALIVE = "session_alive"
     private const val K_PLAYING = "playing"
     private const val K_LAST_PLAYER = "last_player"
@@ -51,6 +54,7 @@ object TrackStore {
             artist = p.getString(K_ARTIST, null),
             coverKey = p.getString(K_COVER_KEY, null),
             coverVersion = p.getLong(K_COVER_VERSION, 0L),
+            coverColor = if (p.contains(K_COVER_COLOR)) p.getInt(K_COVER_COLOR, 0) else null,
             sessionAlive = p.getBoolean(K_ALIVE, false),
             playing = p.getBoolean(K_PLAYING, false),
             lastPlayer = p.getString(K_LAST_PLAYER, null),
@@ -103,7 +107,7 @@ object TrackStore {
         return true
     }
 
-    /** Center-crops, downscales and writes the cover. Call off the main thread. */
+    /** Center-crops, downscales and writes the cover, and picks its color. Call off the main thread. */
     fun saveCover(context: Context, key: String, source: Bitmap) {
         val software =
             if (source.config == Bitmap.Config.HARDWARE) source.copy(Bitmap.Config.ARGB_8888, false) else source
@@ -112,10 +116,12 @@ object TrackStore {
         val tmp = File(context.filesDir, "$COVER_FILE.tmp")
         FileOutputStream(tmp).use { square.compress(Bitmap.CompressFormat.JPEG, 90, it) }
         if (!tmp.renameTo(target)) return
-        prefs(context).edit()
+        val color = WidgetColors.fromCover(square)
+        val edit = prefs(context).edit()
             .putString(K_COVER_KEY, key)
             .putLong(K_COVER_VERSION, System.currentTimeMillis())
-            .apply()
+        if (color != null) edit.putInt(K_COVER_COLOR, color) else edit.remove(K_COVER_COLOR)
+        edit.apply()
     }
 
     fun loadCover(context: Context): Bitmap? {

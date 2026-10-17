@@ -62,6 +62,11 @@ object WidgetRenderer {
         cover: Bitmap?,
     ): RemoteViews {
         val views = RemoteViews(context.packageName, layout)
+        // Set on every update, so a reused view never keeps the previous track's color.
+        val coverColor = if (granted && state.hasCover) state.coverColor else null
+        for ((id, color) in WidgetColors.forLayout(context, layout, coverColor)) {
+            views.setInt(id, "setColorFilter", color)
+        }
         val setup = activity(
             context, REQ_SETUP,
             Intent(context, SetupActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
