@@ -91,6 +91,15 @@ fun SetupScreen(
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(start = 4.dp, top = 8.dp),
             )
+            WidgetCard(
+                name = R.string.classic_widget_name,
+                description = R.string.classic_widget_description,
+                layout = R.layout.widget_classic,
+                previewHeight = 100.dp,
+                track = track,
+                cover = cover,
+                onAdd = onAddWidget?.let { add -> { add(ClassicPlayerWidget::class.java) } },
+            )
             val rounded = remember(cover) { cover?.let(WidgetRenderer::roundCorners) }
             WidgetCard(
                 name = R.string.widget_name,
@@ -100,15 +109,6 @@ fun SetupScreen(
                 track = track,
                 cover = rounded,
                 onAdd = onAddWidget?.let { add -> { add(PlayerWidget::class.java) } },
-            )
-            WidgetCard(
-                name = R.string.classic_widget_name,
-                description = R.string.classic_widget_description,
-                layout = R.layout.widget_classic,
-                previewHeight = 100.dp,
-                track = track,
-                cover = cover,
-                onAdd = onAddWidget?.let { add -> { add(ClassicPlayerWidget::class.java) } },
             )
             if (track?.hasTrack != true) {
                 Text(
